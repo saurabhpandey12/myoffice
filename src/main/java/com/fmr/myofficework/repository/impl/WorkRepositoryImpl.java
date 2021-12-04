@@ -197,5 +197,14 @@ public class WorkRepositoryImpl implements WorkRepository {
         return meetings;
     }
 
+    @Override
+    public void upDateMeeting(Meetings meeting) {
+        Session session = HibernateUtils.getSession();
+        Transaction transaction = session.beginTransaction();
+        session.update(meeting);
+        transaction.commit();
+        session.close();
+    }
+
 
 }

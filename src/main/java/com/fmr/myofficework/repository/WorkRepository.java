@@ -36,4 +36,6 @@ public interface WorkRepository {
     void addExpenses(Expences expences);
 
     Meetings getMeetingById(int id);
+
+    void upDateMeeting(Meetings meetings);
 }

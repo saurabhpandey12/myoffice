@@ -186,14 +186,23 @@ public class WorkServiceImpl implements WorkService {
             try {
                 Task task = workRepository.getTaskById(id);
                 task.setStatus(true);
+                workRepository.updateTask(task);
             } catch (Exception e) {
                 LOGGER.error("No Match found for the id====", id);
             }
 
-        } else if (operationType.equals("meeting")) {
+        } else if (operationType.equals("meetingOpen")) {
+            Meetings meeting = workRepository.getMeetingById(id);
+            meeting.setStatus(true);
+            workRepository.upDateMeeting(meeting);
+            LOGGER.info("Meeting status changes to open for meeting id {}",id);
+            message = "Meeting status changed to open!!! cheers!!!!";
 
-        } else if (operationType.equals("status")) {
-
+        } else if (operationType.equals("meetingClose")) {
+            Meetings meeting = workRepository.getMeetingById(id);
+            meeting.setStatus(false);
+            workRepository.upDateMeeting(meeting);
+            message = "Meeting status changes to close!!! cheers!!!-)";
         }
         return message;
     }

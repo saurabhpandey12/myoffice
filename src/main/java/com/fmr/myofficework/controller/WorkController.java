@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.awt.*;
 import java.util.List;
-import java.util.Random;
+
 
 @RestController
 @RequestMapping("/work-management/v1")
@@ -99,11 +99,10 @@ public class WorkController {
     }
 
 
-    @GetMapping("/changeStatus")
-    ResponseEntity<String> changeStatusOfAnyField(int id,String operationType){
+    @GetMapping("/changeStatus/{id}/{operationType}")
+    ResponseEntity<String> changeStatusOfAnyField(@PathVariable  int id,@PathVariable  String operationType){
         String message = workService.changeStatus(id,operationType);
-
-        return null;
+        return new ResponseEntity<>(message,HttpStatus.OK);
     }
 
 
