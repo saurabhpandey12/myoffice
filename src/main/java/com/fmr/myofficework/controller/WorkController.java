@@ -105,6 +105,19 @@ public class WorkController {
         return new ResponseEntity<>(message,HttpStatus.OK);
     }
 
+    @GetMapping("/getMeetingById/{meetingId}")
+    ResponseEntity<Meetings> getMeetingDetailsById(@PathVariable int meetingId){
+        Meetings meeting = workService.getMeetingById(meetingId);
+        LOGGER.info("Data fetched getMeetingByID : {}",meeting);
+        return new ResponseEntity<>(meeting,HttpStatus.OK);
+    }
+
+    @PutMapping("/updateMeeting")
+    ResponseEntity<String> updateMeeting(@RequestBody Meetings meetings){
+        String response = workService.updateMeeting(meetings);
+        return new ResponseEntity<>(response,HttpStatus.OK);
+    }
+
 
 
 

@@ -193,18 +193,38 @@ public class WorkServiceImpl implements WorkService {
 
         } else if (operationType.equals("meetingOpen")) {
             Meetings meeting = workRepository.getMeetingById(id);
-            meeting.setStatus(true);
+            meeting.setStatus(false);
             workRepository.upDateMeeting(meeting);
             LOGGER.info("Meeting status changes to open for meeting id {}",id);
             message = "Meeting status changed to open!!! cheers!!!!";
 
         } else if (operationType.equals("meetingClose")) {
             Meetings meeting = workRepository.getMeetingById(id);
-            meeting.setStatus(false);
+            meeting.setStatus(true);
             workRepository.upDateMeeting(meeting);
             message = "Meeting status changes to close!!! cheers!!!-)";
         }
         return message;
+    }
+
+    @Override
+    public Meetings getMeetingById(int meetingId) {
+        Meetings meetings
+                = workRepository.getMeetingById(meetingId);
+        return meetings;
+    }
+
+    @Override
+    public String updateMeeting(Meetings meeting) {
+        String msg="";
+        try {
+            workRepository.upDateMeeting(meeting);
+            msg = "Meeting got updated successfully for meetingID : "+meeting.getMeetingId();
+        }catch(Exception e){
+            msg ="Meeting updation got failed please retry to update for meetingId : "+meeting.getMeetingId();
+            LOGGER.error("Meeting updation got failed for meetingID : {}",meeting.getMeetingId());
+        }
+        return msg;
     }
 }
 

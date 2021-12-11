@@ -28,4 +28,8 @@ public interface WorkService {
     String addExpenses(Expences expences);
 
     String changeStatus(int id, String operationType);
+
+    Meetings getMeetingById(int meetingId);
+
+    String updateMeeting(Meetings meeting);
 }
